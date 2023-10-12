@@ -34,5 +34,15 @@ router.post('/register',(req,res)=>{
     new_user.save().then(()=>console.log('saved sucessfully'))
 })
 
+router.post('/login',(req,res)=>{
+    let user_data=req.body
+    let fetch_data=user_model.find({user_name:user_data.user_name})
+    console.log('this is working')
+    if(fetch_data.password==user_data.password)
+           res.send('login sucessfull')
+    else  
+       res.send('login unsucessful')
+})
+
 
 module.exports=router
