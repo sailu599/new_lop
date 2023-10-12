@@ -11,4 +11,4 @@ app.use('/login',router)
 app.use('/register',router)
 
 
-app.listen(process.env.port||8000)
+app.listen(process.env.PORT||8000)
