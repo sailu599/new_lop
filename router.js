@@ -3,8 +3,16 @@ const  router=express.Router()
 const user_model=require('./model/user_model')
 const mongo=require('mongoose')
 const uri = "mongodb+srv://saileshsailu599:KQ9bnAwbspZPSA31@cluster0.asy6z9n.mongodb.net/?retryWrites=true&w=majority"
+const connection=async function(){
+try {
+    await mongo.connect(uri);
+    console.log("Connected to MongoDB Atlas");
+} catch (error) {
+    console.error("Error connecting to MongoDB Atlas:", error);
+}
+}
+connection()
 
-mongo.connect(uri).then(()=>console.log('connected sucessfully'))
 
 router.get('/',(req,res)=>{
     res.send("done");
