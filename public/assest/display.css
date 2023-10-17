@@ -1,4 +1,10 @@
 /* Default styles for larger screens */
+body {
+    background-image: url('/public/assest/background.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
 table {
     width: 80%;
     margin: 20px auto;

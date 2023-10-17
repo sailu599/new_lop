@@ -1,28 +1,66 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <style>
-            body {
-              background-image: url("/public/assest/background.jpg");
-              background-size: cover; /* This property scales the image to cover the entire viewport. */
-              background-repeat: no-repeat; /* Prevents image repetition. */
-              background-attachment: fixed; /* Optional: Keeps the background image fixed while scrolling. */
-            }
-          </style>
-        <title>
-            add_products
-        </title>
-    </head>
-    <body>
-        <form method="post" action="/add_products">
-         <label>product_id</label>
-         <input type="text" name="product_id">
-         <label>product_name</label>
-         <input type="text" name="product_name">
-         <label>price</label>
-         <input type="number" name="price">
-         <label>Count</label>
-         <input type="number" name="count">
-         <input type="submit" value="add">
-        </form>
-    </body>
+<head>
+    <style>
+        body {
+            background-image: url("/public/assest/background.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            margin: 20px;
+            padding: 20px;
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+    <title>add_products</title>
+</head>
+<body>
+    <form method="post" action="/add_products">
+        <label for="product_id">Product ID</label>
+        <input type="text" name="product_id" id="product_id">
+
+        <label for="product_name">Product Name</label>
+        <input type="text" name="product_name" id="product_name">
+
+        <label for="price">Price</label>
+        <input type="number" name="price" id="price">
+
+        <label for="count">Count</label>
+        <input type="number" name="count" id="count">
+
+        <input type="submit" value="Add">
+    </form>
+</body>
 </html>

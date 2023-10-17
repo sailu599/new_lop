@@ -8,7 +8,8 @@ const user_model=require('./model/user_model')
 const product_model=require('./model/product_model')
 const bill_model=require('./model/bill_model')
 
-const uri="mongodb://127.0.0.1:27017/login"
+const uri = "mongodb+srv://saileshsailu599:KQ9bnAwbspZPSA31@cluster0.asy6z9n.mongodb.net/?retryWrites=true&w=majority"
+
 const connection=async function(){
 try {
     await mongo.connect(uri);
@@ -29,7 +30,7 @@ let user_name_global;
 
 
 router.get('/',(req,res)=>{
-    res.send("done");
+    res.render('homepage.ejs');
 })
 
 router.get('/login',(req,res)=>{
