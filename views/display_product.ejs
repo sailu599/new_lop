@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <link href="/public/assest/display.css" rel="stylesheet" type="text/css">
+        <title>
+            product_catlog
+        </title>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th>Products</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Select</th>
+            </tr>
+        <form method="post" action="/place_order">
+            <% data.forEach(element=>{%>
+            <tr>
+                <td><%= element.product_name %> </td>
+                <td><%= element.price %></td>
+                <td><%= element.count %> </td>
+                <td><input type="checkbox" name=<%= element.product_name %> value=<%= element.price %> > </td>
+            </tr>
+        <%}) %>
+    </table>
+    <div style="text-align: right;margin-right: 75px;"> <!-- Add a containing div with text-align:right -->
+        <input type="submit" value="ORDER">
+    </div>
+        </form>
+        
+    </body>
+</html>

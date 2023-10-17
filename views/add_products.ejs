@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <style>
+            body {
+              background-image: url("/public/assest/background.jpg");
+              background-size: cover; /* This property scales the image to cover the entire viewport. */
+              background-repeat: no-repeat; /* Prevents image repetition. */
+              background-attachment: fixed; /* Optional: Keeps the background image fixed while scrolling. */
+            }
+          </style>
+        <title>
+            add_products
+        </title>
+    </head>
+    <body>
+        <form method="post" action="/add_products">
+         <label>product_id</label>
+         <input type="text" name="product_id">
+         <label>product_name</label>
+         <input type="text" name="product_name">
+         <label>price</label>
+         <input type="number" name="price">
+         <label>Count</label>
+         <input type="number" name="count">
+         <input type="submit" value="add">
+        </form>
+    </body>
+</html>

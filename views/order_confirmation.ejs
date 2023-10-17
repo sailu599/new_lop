@@ -1,0 +1,66 @@
+<html>
+    <head>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f5f5f5;
+            }
+    
+            form {
+                background-color: #fff;
+                border: 1px solid #ccc;
+                padding: 20px;
+                width: 300px;
+                margin: 20px auto;
+                border-radius: 5px;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            }
+    
+            label {
+                display: block;
+                margin-bottom: 5px;
+                font-weight: bold;
+            }
+    
+            input[type="number"] {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                margin-bottom: 15px;
+            }
+    
+            input[type="submit"] {
+                background-color: #3498db;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+    
+            input[type="submit"]:hover {
+                background-color: #2577a9;
+            }
+        </style>
+    
+        <title>
+            Confirm_your order
+        </title>
+    </head>
+    <body>
+        <form id="form2"  action="/update" method="post">
+            <% for (let keys in data) { %>
+              <label><%= keys %></label>
+              <input type="number" name="<%= keys %>" cost="<%= data[keys] %>" value="1" max="10" min="1">
+              <br>
+          <% } %>
+      
+          
+            <input type="submit">
+          </form>
+        </table>
+    </body>
+</html>

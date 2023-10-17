@@ -7,4 +7,3 @@ let user_schema=mongo.Schema({
 
 let user_model=mongo.model('user_details',user_schema)
 module.exports=user_model
-//connection

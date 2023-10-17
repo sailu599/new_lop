@@ -1,0 +1,34 @@
+<html>
+    <head>
+      <link rel="stylesheet" href="public/assest/sucessful.css"
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    Toatal
+                </th>
+            </tr>
+<% bill.forEach(element=>{%>
+    <tr>
+    <td><%= element.product_name %></td>
+    <td><%= element.product_count %></td>
+    <td><%= element.product_price %></td>
+    <td><%= element.total %></td>
+   </tr>
+<%}) %>
+        </table>
+        <div style="text-align: right;margin-right: 50px;">
+        Gross total:<%= total %>
+    </div>
+</body>
+</html>
