@@ -8,7 +8,7 @@ const user_model=require('./model/user_model')
 const product_model=require('./model/product_model')
 const bill_model=require('./model/bill_model')
 
-const uri = "mongodb+srv://saileshsailu599:KQ9bnAwbspZPSA31@cluster0.asy6z9n.mongodb.net/?retryWrites=true&w=majority"
+const uri = "mongodb://127.0.0.1:27017/mydb"
 
 const connection=async function(){
 try {
@@ -40,8 +40,8 @@ router.get('/login',(req,res)=>{
 router.post('/login',(req,res)=>{
     let check=async function(){
     let user_data=req.body
-    let fetch_data=await user_model.findOne({user_name:user_data.user_name})
-    console.log(user_data.user_name)
+    //console.log(user_data)
+    await user_model.findOne({user_name:user_data.user_name}).then((fetch_data)=>{
     if(fetch_data.password==user_data.password)
     {
            res.redirect('/display_product')
@@ -51,6 +51,7 @@ router.post('/login',(req,res)=>{
     {  
        res.send('login unsucessful')
     }
+});
 }
   check()
 })
@@ -77,7 +78,7 @@ router.get('/display_product',(req,res)=>{
     let fetch=async function()
     {
       fetch_product=await product_model.find({count:{$gt:0}})
-      console.log('comming')
+    //  console.log(fetch_product)
       res.render('display_product.ejs',{data:fetch_product})
     }
     fetch()
@@ -107,12 +108,14 @@ router.post('/add_products',(req,res)=>{
 
   router.post('/place_order',(req,res)=>{
     datas=req.body;
+    //console.log(datas)
     res.render('order_confirmation',{data:datas})
   })
 
 
   router.post('/update',(req,res)=>{
         data=req.body
+        //console.log(data)
         let bill=[]
         let final_bill=[]
         let total_amount=0;
@@ -129,31 +132,21 @@ router.post('/add_products',(req,res)=>{
         
         let find_product_update=async function(key,data)
         {
-
-            let item=await product_model.findOne({product_name:key})
-            let update=item.count-data[key]
-            await product_model.findOneAndUpdate({product_name:key},{count:update},{new:true}).then(()=>console.log('sucessfull'))
-            create(key,item.price,data[key])
-            bill.map(abc=>{
-                  let product={
-                    product_name:abc.get('name'),
-                    product_price:abc.get('price'),
-                    product_count:Number(abc.get('count')),
-                    total:abc.get('total')
-                  }
-                  console.log(product)
-                  final_bill.push(product)
-            })
-          //  console.log(final_bill)
+      //      console.log(key);
+            let update,price;
+            await product_model.findOne({product_name:key}).then((item)=>{update=item.count-data[key];price=item.price})
+            await product_model.findOneAndUpdate({product_name:key},{count:update},{new:true});
+            create(key,price,data[key])
         }
+
         let save_bill=async function(username,product_bill)
         {
-              let bill=new bill_model({
+              let db_bill=new bill_model({
                 consumer_name:username,
                 bill:product_bill
               })
          
-              bill.save().then(()=>console.log('muduchu da samy'))
+              db_bill.save().then(()=>console.log('bill saved sucessfully in db'))
         }
     
        let final_function=async function()
@@ -162,7 +155,15 @@ router.post('/add_products',(req,res)=>{
         {
             await find_product_update(keys,data)
         }
-         
+        bill.map(abc=>{
+            let product={
+              product_name:abc.get('name'),
+              product_price:abc.get('price'),
+              product_count:Number(abc.get('count')),
+              total:abc.get('total')
+            }
+            final_bill.push(product)
+      })
        await  save_bill(user_name_global,final_bill)
        res.render('sucessful.ejs',{bill:final_bill,total:total_amount})
       }
